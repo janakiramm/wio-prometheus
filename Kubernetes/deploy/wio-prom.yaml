@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wio-prometheus
+spec:
+  selector:
+    app: wio-prometheus
+  ports:
+    - protocol: TCP
+      port: 80      
+      targetPort: 5000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wio-prometheus
+  labels:
+    app: wio-prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wio-prometheus
+  template:
+    metadata:
+      labels:
+        app: wio-prometheus
+    spec:
+      containers:
+      - name: wio-prometheus
+        image: janakiramm/wio-prometheus
+        ports:
+        - containerPort: 5000
+
