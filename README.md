@@ -1,1 +1,1 @@
-# wio-terminal
+# Wio Terminal Dashboard
